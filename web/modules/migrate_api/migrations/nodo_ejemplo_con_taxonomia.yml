@@ -1,0 +1,35 @@
+id: nodo_ejemplo_t
+label: 'Ejemplo de migracion de nodo con titulo, cuerpo e imagen'
+migration_group: node
+source:
+  plugin: csv
+  path: modules/migrate_api/data/nodo_ejemplo_t.csv
+  ids: [unique_id]
+process:
+  title: title
+  field_descripcion: description
+  body/value:
+    plugin: get
+    source: body
+  body/format:
+    plugin: default_value
+    default_value: 'full_html'
+  field_imagen:
+    plugin: migration_lookup
+    source: image_id
+    migration: imagenes_nodo_ejemplo
+  field_etiquetas:
+    - plugin: explode
+      delimiter: '|'
+      source: tag_id
+    - plugin: multiple_values
+    - plugin: migration_lookup
+      migration: taxonomia_ejemplos
+destination:
+  plugin: 'entity:node'
+  default_bundle: migracion
+migration_dependencies:
+  required:
+    - imagenes_nodo_ejemplo
+    - taxonomia_ejemplos
+  optional: { }

@@ -1,0 +1,14 @@
+id: bloque_ejemplo
+label: 'Ejemplo de migracion de bloque con titulo y cuerpo'
+migration_group: block
+source:
+  plugin: csv
+  path: modules/migrate_api/data/bloque_migracion.csv
+  ids: [block_id]
+process:
+  info: title
+  field_description: description
+destination:
+  plugin: 'entity:block_content'
+  default_bundle: bloque_migracion
+migration_dependencies: {}

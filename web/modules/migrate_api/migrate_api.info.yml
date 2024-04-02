@@ -1,0 +1,12 @@
+name: Migracion de contenidos con Migrate API
+description: Migration content with Migrate API
+type: module
+core_version_requirement: ^10
+dependencies:
+  - drupal:migrate
+  - migrate_plus:migrate_plus
+  - entity_reference_revisions:entity_reference_revisions
+  - migrate_source_csv:migrate_source_csv
+  - migrate_tools:migrate_tools
+  - paragraphs:paragraphs
+package: migrate

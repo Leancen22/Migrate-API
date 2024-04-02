@@ -1,0 +1,16 @@
+id: taxonomia_ejemplos
+label: "Ejemplo de migracion de taxonomias"
+migration_group: tags
+source:
+  plugin: csv
+  path: modules/migrate_api/data/taxonomia_ejemplo.csv
+  ids: [id_terms]
+  header_offset: null
+  fields:
+    - name: id_terms
+    - name: name
+process:
+  name: name
+destination:
+  plugin: 'entity:taxonomy_term'
+  default_bundle: tags

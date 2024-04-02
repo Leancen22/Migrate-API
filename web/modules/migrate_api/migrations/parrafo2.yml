@@ -1,0 +1,16 @@
+id: parrafo2
+label: 'Parrafo2 migration'
+migration_group: parrafo2
+source:
+  plugin: csv
+  path: modules/migrate_api/data/parrafo2.csv
+  ids: [parrafo2_id]
+  header_offset: null
+  fields:
+    - name: parrafo2_id
+    - name: contenido
+process:
+  field_texto2: contenido
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: parrafo2

@@ -1,0 +1,31 @@
+id: usuarios_ejemplos
+label: 'Migracion de usuarios para ejemplo de migracion'
+migration_group: custom
+source:
+  plugin: csv
+  path: modules/migrate_api/data/usuarios_ejemplos.csv
+  ids: [uid]
+  header_offset: null
+  fields:
+    - name: uid
+    - name: name
+    - name: mail
+    - name: status
+    - name: created_at
+    - name: hash_pass
+process:
+  uid: uid
+  name: name
+  mail: mail
+  status: status
+  created:
+    plugin: format_date
+    from_format: 'Y-m-d H:i:s'
+    to_format: 'U'
+    source: created_at
+  pass:
+    plugin: get
+    source: hash_pass
+destination:
+  plugin: 'entity:user'
+migration_dependencies: {}

@@ -1,0 +1,30 @@
+id: parrafo_padre
+label: 'Parrafo padre'
+migration_group: multi_paragraph
+source:
+  plugin: csv
+  path: modules/migrate_api/data/parrafo_padre.csv
+  ids: [paragraph_id]
+  header_offset: null
+  fields:
+    - name: paragraph_id
+    - name: hijos
+process:
+  field_hijos:
+    - plugin: explode
+      delimiter: '|'
+      source: hijos
+    - plugin: multiple_values
+    - plugin: migration_lookup
+      migration:
+        - parrafo1
+        - parrafo2
+    - plugin: entity_reference
+destination:
+  plugin: 'entity_reference_revisions:paragraph'
+  default_bundle: parrafo_padre
+migration_dependencies:
+  required:
+    - parrafo1
+    - parrafo2
+  optional: { }

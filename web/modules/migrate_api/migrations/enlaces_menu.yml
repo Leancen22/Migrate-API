@@ -1,0 +1,44 @@
+id: enlaces_menu
+label: 'Enlaces de menu para el ejemplo de migracion'
+migration_group: menu
+source:
+  plugin: csv
+  path: modules/migrate_api/data/enlaces_menu.csv
+  ids: [unique_id]
+  header_offset: null
+  fields:
+    - name: unique_id
+    - name: name
+    - name: url
+    - name: parent_id
+process:
+  menu_name:
+    plugin: default_value
+    default_value: 'main'
+  title:
+    plugin: get
+    source: name
+  'link/uri':
+    plugin: get
+    source: url
+  parent:
+    plugin: menu_link_parent
+    source:
+       - parent_id
+       - 'main'
+  external:
+    plugin: default_value
+    default_value: 0
+  expanded:
+    plugin: default_value
+    default_value: 0
+  enabled:
+    plugin: default_value
+    default_value: 1
+  langcode:
+    plugin: default_value
+    default_value: 'en'
+destination:
+  plugin: entity:menu_link_content
+  bundle: menu_link_content
+  no_stub: true
